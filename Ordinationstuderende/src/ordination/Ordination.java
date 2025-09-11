@@ -8,6 +8,7 @@ public abstract class Ordination {
     private LocalDate slutDen;
 
     // TODO Link til Laegemiddel
+    private Laegemiddel laegemiddel;
     // TODO constructor (med specifikation)
 
     public LocalDate getStartDen() {
@@ -24,6 +25,10 @@ public abstract class Ordination {
      */
     public int antalDage() {
         return (int) ChronoUnit.DAYS.between(startDen, slutDen) + 1;
+    }
+
+    public Laegemiddel getLaegemiddel() {
+        return laegemiddel;
     }
 
     @Override
@@ -48,4 +53,6 @@ public abstract class Ordination {
      * @return
      */
     public abstract String getType();
+
+
 }
