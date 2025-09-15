@@ -64,8 +64,15 @@ public class Controller {
 			double morgenAntal, double middagAntal, double aftenAntal,
 			double natAntal) {
 
-		if(startDen.isAfter(slutDen))
-			throw new IllegalArgumentException("Startdato er efter slutden");
+
+        if (startDen.isAfter(slutDen))
+            throw new IllegalArgumentException("Startdato er efter slutden");
+
+        if (startDen == null || slutDen == null || patient == null || laegemiddel == null)
+            throw new IllegalArgumentException("Parameter må ikke være null");
+
+        if (morgenAntal >= 0 || middagAntal >= 0 || aftenAntal >= 0 || natAntal >= 0)
+            throw new IllegalArgumentException("Antal  skal være >= 0");
 
        DagligFast df = new DagligFast(startDen,slutDen,laegemiddel,morgenAntal, middagAntal, aftenAntal, natAntal);
        patient.addOrdination(df);
@@ -153,7 +160,19 @@ public class Controller {
 		if (laegemiddel == null)
 			throw new IllegalArgumentException("laegemiddel må ikke være null");
 
-		return 0;
+        int count = 0;
+
+        for(Patient patient : getAllPatienter()) {
+            double vaegt = patient.getVaegt();
+            if (vaegt >= vægtStart && vaegt <= vægtSlut) {
+                for (Ordination ordination : patient.getOrdinationer()) {
+                    if (ordination.getLaegemiddel().equals(laegemiddel)) {
+                        count++;
+                    }
+                }
+            }
+        }
+		return count;
 	}
 
 	public List<Patient> getAllPatienter() {
