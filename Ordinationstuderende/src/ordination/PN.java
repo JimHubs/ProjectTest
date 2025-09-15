@@ -1,5 +1,6 @@
 package ordination;
 
+import java.lang.reflect.Constructor;
 import java.time.LocalDate;
 
 public class PN extends Ordination{
@@ -7,6 +8,11 @@ public class PN extends Ordination{
     private double antalEnheder;
 
     private Laegemiddel laegemiddel;
+
+    public PN(LocalDate startDen, LocalDate slutDen, Laegemiddel laegemiddel, double antalEnheder) {
+        super(startDen, slutDen, laegemiddel);
+    }
+
 
     /**
      * Registrerer at der er givet en dosis paa dagen givesDen
@@ -20,7 +26,7 @@ public class PN extends Ordination{
 
     public boolean givDosis(LocalDate givesDen) {
         // TODO
-        return false;   
+            return false;
     }
 
     public double doegnDosis() {

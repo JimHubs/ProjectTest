@@ -40,7 +40,19 @@ public class Controller {
 	public PN opretPNOrdination(LocalDate startDen, LocalDate slutDen,
 			Patient patient, Laegemiddel laegemiddel, double antal) {
 		// TODO
-		return null;
+
+		if (startDen == null || slutDen == null || patient == null || laegemiddel == null)
+			throw new IllegalArgumentException("Parameter må ikke være null");
+
+		if(antal < 0)
+			throw  new IllegalArgumentException("Antal  skal være >= 0");
+
+		if (startDen.isAfter(slutDen))
+			throw new IllegalArgumentException("Start dato må ikke være efter slut dato");
+
+		PN pn = new PN(startDen, slutDen, laegemiddel, antal);
+
+		return pn;
 	}
 
 	/**
