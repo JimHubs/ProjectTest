@@ -11,6 +11,7 @@ public class PN extends Ordination{
 
     public PN(LocalDate startDen, LocalDate slutDen, Laegemiddel laegemiddel, double antalEnheder) {
         super(startDen, slutDen, laegemiddel);
+        this.antalEnheder=antalEnheder;
     }
 
 
