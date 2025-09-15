@@ -23,8 +23,6 @@ public class PN extends Ordination{
      * @return
      */
 
-
-
     public boolean givDosis(LocalDate givesDen) {
         // TODO Færdig
 
