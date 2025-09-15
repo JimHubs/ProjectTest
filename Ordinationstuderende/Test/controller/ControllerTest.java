@@ -57,7 +57,16 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void opretDagligSkaevOrdination() {
+    void samletDosis() {
+        Laegemiddel laegemiddel = new Laegemiddel("Paracetamol", 1, 1.5, 2, "Ml");
+        PN pn = new PN(LocalDate.of(2025,3,14), LocalDate.of(2025,3,28),laegemiddel, 3);
+
+        pn.givDosis(LocalDate.of(2025,3,16));
+        pn.givDosis(LocalDate.of(2025,3,17));
+        pn.givDosis(LocalDate.of(2025,3,19));
+        pn.givDosis(LocalDate.of(2025,3,18));
+
+        assertEquals(12, pn.samletDosis());
     }
 
     @org.junit.jupiter.api.Test
