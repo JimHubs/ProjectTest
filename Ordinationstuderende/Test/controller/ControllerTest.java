@@ -119,18 +119,25 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void getAllPatienter() {
-    }
-
-    @org.junit.jupiter.api.Test
-    void getAllLaegemidler() {
-    }
-
-    @org.junit.jupiter.api.Test
     void opretPatient() {
+        Patient faktiskpatient = controller.opretPatient("1", "John", 10.0);
+        Patient forventetPatient = new Patient("1", "John", 10.0);
+        assertEquals(forventetPatient.getCprnr(), faktiskpatient.getCprnr());
+        assertEquals(forventetPatient.getNavn(), faktiskpatient.getNavn());
+        assertEquals(forventetPatient.getVaegt(), faktiskpatient.getVaegt());
     }
 
     @org.junit.jupiter.api.Test
     void opretLaegemiddel() {
+        Laegemiddel faktiskLaegemiddel = controller.opretLaegemiddel("Fent", 0.1,
+                0.2,0.4, "Test");
+        Laegemiddel forventetLaegemiddel = new Laegemiddel("Fent", 0.1,
+                0.2, 0.4, "Test");
+        assertEquals(forventetLaegemiddel.getNavn(), faktiskLaegemiddel.getNavn());
+        assertEquals(forventetLaegemiddel.getEnhedPrKgPrDoegnLet(),faktiskLaegemiddel.getEnhedPrKgPrDoegnLet());
+        assertEquals(forventetLaegemiddel.getEnhedPrKgPrDoegnNormal(), faktiskLaegemiddel.getEnhedPrKgPrDoegnNormal());
+        assertEquals(forventetLaegemiddel.getEnhedPrKgPrDoegnTung(),faktiskLaegemiddel.getEnhedPrKgPrDoegnTung());
+        assertEquals(forventetLaegemiddel.getEnhed(),faktiskLaegemiddel.getEnhed());
+
     }
 }
