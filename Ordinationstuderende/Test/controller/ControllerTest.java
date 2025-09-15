@@ -1,11 +1,12 @@
 package controller;
 
-import ordination.DagligFast;
-import ordination.Laegemiddel;
-import ordination.PN;
+import ordination.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -67,7 +68,19 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void ordinationPNAnvendt() {
+    void DagligSkaev_OpretDosis() {
+
+        ArrayList<Dosis> doser = new ArrayList<>();
+
+        Laegemiddel laegemiddel = new Laegemiddel("Paracetamol", 1, 1.5, 2, "Ml");
+        DagligSkaev dagligSkaev = new DagligSkaev(LocalDate.of(2025,3,14), LocalDate.of(2025,3,28), laegemiddel, doser);
+
+        dagligSkaev.opretDosis(LocalTime.of(8,0),5);
+        dagligSkaev.opretDosis(LocalTime.of(15,0), 7);
+
+        assertEquals(12, dagligSkaev.samletDosis());
+
+
     }
 
     @org.junit.jupiter.api.Test
