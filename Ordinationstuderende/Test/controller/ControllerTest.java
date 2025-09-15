@@ -2,15 +2,12 @@ package controller;
 
 import ordination.DagligFast;
 import ordination.Laegemiddel;
-import ordination.Ordination;
 import ordination.PN;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ControllerTest {
 
