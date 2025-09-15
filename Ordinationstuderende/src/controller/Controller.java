@@ -4,11 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import ordination.DagligFast;
-import ordination.DagligSkaev;
-import ordination.Laegemiddel;
-import ordination.PN;
-import ordination.Patient;
+import ordination.*;
 import storage.Storage;
 
 public class Controller {
@@ -53,6 +49,8 @@ public class Controller {
 
 		PN pn = new PN(startDen, slutDen, laegemiddel, antal);
 
+		patient.addOrdination(pn);
+
 		return pn;
 	}
 
@@ -67,6 +65,11 @@ public class Controller {
 			double morgenAntal, double middagAntal, double aftenAntal,
 			double natAntal) {
 		// TODO
+
+		if(startDen.isAfter(slutDen))
+			throw new IllegalArgumentException("Startdato er efter slutden");
+
+
 		return null;
 	}
 
@@ -93,6 +96,13 @@ public class Controller {
 	 */
 	public void ordinationPNAnvendt(PN ordination, LocalDate dato) {
 		// TODO
+		if(ordination == null || dato == null)
+			throw new IllegalArgumentException("Parameter må ikke være null");
+
+		if(dato.isAfter(ordination.getSlutDen()) || dato.isBefore(ordination.getStartDen())){
+			throw new IllegalArgumentException("Datoen er ikke indefor ordinations gyldighedsperiode");
+		}
+		ordination.givDosis(dato);
 	}
 
 	/**
@@ -102,8 +112,22 @@ public class Controller {
 	 * Pre: patient og lægemiddel er ikke null
 	 */
 	public double anbefaletDosisPrDoegn(Patient patient, Laegemiddel laegemiddel) {
-		//TODO
-		return 0;
+		if (patient == null || laegemiddel == null) {
+			throw new IllegalArgumentException("Parametre må ikke være null");
+		}
+
+		double vaegt = patient.getVaegt();
+		double dosisPrKg;
+
+		if (vaegt < 25) {
+			dosisPrKg = laegemiddel.getEnhedPrKgPrDoegnLet();
+		} else if (vaegt <= 120) {
+			dosisPrKg = laegemiddel.getEnhedPrKgPrDoegnNormal();
+		} else {
+			dosisPrKg = laegemiddel.getEnhedPrKgPrDoegnTung();
+		}
+
+		return vaegt * dosisPrKg;
 	}
 
 	/**
@@ -114,6 +138,9 @@ public class Controller {
 	public int antalOrdinationerPrVægtPrLægemiddel(double vægtStart,
 			double vægtSlut, Laegemiddel laegemiddel) {
 		// TODO
+		if (laegemiddel == null)
+			throw new IllegalArgumentException("laegemiddel må ikke være null");
+
 		return 0;
 	}
 
