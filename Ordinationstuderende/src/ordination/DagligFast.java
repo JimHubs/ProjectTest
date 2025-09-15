@@ -4,13 +4,17 @@ import java.lang.reflect.Array;
 import java.time.LocalDate;
 
 public class DagligFast extends Ordination{
-    // TODO
+    // TODO Færdig
 
     private Dosis doser[] = new Dosis[4];
 
-    public DagligFast(LocalDate startDen, LocalDate slutDen, Laegemiddel laegemiddel, Dosis[] doser) {
+    public DagligFast(LocalDate startDen, LocalDate slutDen, Laegemiddel laegemiddel,
+                      Dosis morgen, Dosis middag, Dosis aften, Dosis nat) {
         super(startDen, slutDen, laegemiddel);
-        this.doser=doser;
+        this.doser[0] = morgen;
+        this.doser[1] = middag;
+        this.doser[2] = aften;
+        this.doser[3] = nat;
     }
 
     public Dosis[] getDoser() {
@@ -19,16 +23,22 @@ public class DagligFast extends Ordination{
 
     @Override
     public double samletDosis() {
-        return 0;
+        return doegnDosis() * antalDage();
     }
 
     @Override
     public double doegnDosis() {
-        return 0;
+        double sum = 0;
+        for (Dosis dosis : doser){
+            if(dosis != null){
+                sum += dosis.getAntal();
+            }
+        }
+        return sum;
     }
 
     @Override
     public String getType() {
-        return "";
+        return "DagligFast";
     }
 }
