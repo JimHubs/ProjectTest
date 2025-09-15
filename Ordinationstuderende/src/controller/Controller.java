@@ -36,7 +36,6 @@ public class Controller {
 	 */
 	public PN opretPNOrdination(LocalDate startDen, LocalDate slutDen,
 			Patient patient, Laegemiddel laegemiddel, double antal) {
-		// TODO
 
 		if (startDen == null || slutDen == null || patient == null || laegemiddel == null)
 			throw new IllegalArgumentException("Parameter må ikke være null");
@@ -64,7 +63,6 @@ public class Controller {
 			LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
 			double morgenAntal, double middagAntal, double aftenAntal,
 			double natAntal) {
-		// TODO
 
 		if(startDen.isAfter(slutDen))
 			throw new IllegalArgumentException("Startdato er efter slutden");
@@ -85,7 +83,6 @@ public class Controller {
 	public DagligSkaev opretDagligSkaevOrdination(LocalDate startDen,
       LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
       LocalTime[] klokkeSlet, double[] antalEnheder) {
-		// TODO
         ArrayList<Dosis> doser = new ArrayList<>();
         for (int i = 0; i < klokkeSlet.length; i++) {
             Dosis dose = new Dosis(klokkeSlet[i], antalEnheder[i]);
