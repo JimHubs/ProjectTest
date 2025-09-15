@@ -62,15 +62,21 @@ public class Controller {
 	 */
 	public DagligFast opretDagligFastOrdination(LocalDate startDen,
 			LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
-			double morgenAntal, double middagAntal, double aftenAntal,
-			double natAntal) {
-		// TODO
+			double morgen, double middag, double aften,
+			double nat) {
 
 		if(startDen.isAfter(slutDen))
 			throw new IllegalArgumentException("Startdato er efter slutden");
 
+		if (startDen == null || slutDen == null || patient == null || laegemiddel == null)
+			throw new IllegalArgumentException("Parameter må ikke være null");
 
-		return null;
+		if (morgen >= 0 || middag >= 0 || aften >= 0 || nat >= 0)
+			throw  new IllegalArgumentException("Antal  skal være >= 0");
+
+		DagligFast fast = new DagligFast(startDen,slutDen,laegemiddel,morgen,middag,aften,nat);
+		patient.addOrdination(fast);
+		return fast;
 	}
 
 	/**
