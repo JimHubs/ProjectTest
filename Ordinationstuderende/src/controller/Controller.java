@@ -2,13 +2,10 @@ package controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
-import ordination.DagligFast;
-import ordination.DagligSkaev;
-import ordination.Laegemiddel;
-import ordination.PN;
-import ordination.Patient;
+import ordination.*;
 import storage.Storage;
 
 public class Controller {
@@ -78,10 +75,24 @@ public class Controller {
 	 * Pre: alle tal i antalEnheder > 0
 	 */
 	public DagligSkaev opretDagligSkaevOrdination(LocalDate startDen,
-			LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
-			LocalTime[] klokkeSlet, double[] antalEnheder) {
+      LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
+      LocalTime[] klokkeSlet, double[] antalEnheder) {
 		// TODO
-		return null;
+        ArrayList<Dosis> doser = new ArrayList<>();
+        for (int i = 0; i < klokkeSlet.length; i++) {
+            Dosis dose = new Dosis(klokkeSlet[i], antalEnheder[i]);
+            doser.add(dose);
+        }
+
+        if (startDen == null || slutDen == null || patient == null || laegemiddel == null)
+            throw new IllegalArgumentException("Parameter må ikke være null");
+
+        if (startDen.isAfter(slutDen))
+            throw new IllegalArgumentException("Start dato må ikke være efter slut dato");
+
+        DagligSkaev ds = new DagligSkaev(startDen, slutDen,laegemiddel, doser);
+        patient.addOrdination(ds);
+        return ds;
 	}
 
 	/**
