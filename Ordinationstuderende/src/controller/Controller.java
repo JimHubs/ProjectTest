@@ -64,15 +64,11 @@ public class Controller {
 			double morgenAntal, double middagAntal, double aftenAntal,
 			double natAntal) {
 
-
         if (startDen.isAfter(slutDen))
             throw new IllegalArgumentException("Startdato er efter slutden");
 
         if (startDen == null || slutDen == null || patient == null || laegemiddel == null)
             throw new IllegalArgumentException("Parameter må ikke være null");
-
-        if (morgenAntal >= 0 || middagAntal >= 0 || aftenAntal >= 0 || natAntal >= 0)
-            throw new IllegalArgumentException("Antal  skal være >= 0");
 
        DagligFast df = new DagligFast(startDen,slutDen,laegemiddel,morgenAntal, middagAntal, aftenAntal, natAntal);
        patient.addOrdination(df);
