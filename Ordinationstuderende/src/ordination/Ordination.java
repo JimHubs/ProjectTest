@@ -6,10 +6,18 @@ import java.time.temporal.ChronoUnit;
 public abstract class Ordination {
     private LocalDate startDen;
     private LocalDate slutDen;
-
     // TODO Link til Laegemiddel Færdig
     private Laegemiddel laegemiddel;
+
     // TODO constructor (med specifikation) Færdig
+
+    /**
+     *initalisere en ny ordination inden for de de given dator i perioden
+     *Pre:StartDen, slutDen og laegemiddel er ikke null
+     * @param startDen startDen er start datoen på hvornår ordinationen er gældende
+     * @param slutDen slutden er slut datoen på hvornår ordinationen er gældende
+     * @param laegemiddel Er den laegemiddel der bruges
+     */
 
     public Ordination(LocalDate startDen, LocalDate slutDen, Laegemiddel laegemiddel){
         this.startDen = startDen;
