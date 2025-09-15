@@ -156,6 +156,19 @@ public class Controller {
 		if (laegemiddel == null)
 			throw new IllegalArgumentException("laegemiddel må ikke være null");
 
+        int count = 0;
+
+        for(Patient patient : getAllPatienter()) {
+            double vaegt = patient.getVaegt();
+            if (vaegt >= vægtStart && vaegt <= vægtSlut) {
+                for (Ordination ordination : patient.getOrdinationer()) {
+                    if (ordination.getLaegemiddel().equals(laegemiddel)) {
+                        count++;
+                    }
+                }
+            }
+        }
+
 		return 0;
 	}
 
