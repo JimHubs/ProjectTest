@@ -69,8 +69,9 @@ public class Controller {
 		if(startDen.isAfter(slutDen))
 			throw new IllegalArgumentException("Startdato er efter slutden");
 
-
-		return null;
+       DagligFast df = new DagligFast(startDen,slutDen,laegemiddel,morgenAntal, middagAntal, aftenAntal, natAntal);
+       patient.addOrdination(df);
+       return df;
 	}
 
 	/**
