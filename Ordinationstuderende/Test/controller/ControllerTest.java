@@ -152,6 +152,17 @@ class ControllerTest {
         assertEquals("Parametre må ikke være null", exception.getMessage());
     }
 
+    @Test
+    void opretDagligFastOrdination_StartDatoError(){
+        Patient patient = new Patient("1","John", 10.0);
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            DagligFast dagligFast = controller.opretDagligFastOrdination(LocalDate.of(2025,3,29),
+                    LocalDate.of(2025,3,24), patient, standardLaegemiddel, 2,1,3,1 );
+        });
+
+        assertEquals("Startdato er efter slutden", exception.getMessage());
+    }
+
     @org.junit.jupiter.api.Test
     void anbefaletDosisPrDoegn_Let_24() {
         Patient patient = new Patient("1","John", 24);
@@ -200,10 +211,6 @@ class ControllerTest {
         double faktiskResultat = controller.anbefaletDosisPrDoegn(patient,
                 standardLaegemiddel);
         assertEquals(forventetResultat, faktiskResultat);
-    }
-
-    @org.junit.jupiter.api.Test
-    void antalOrdinationerPrVægtPrLægemiddel() {
     }
 
     @org.junit.jupiter.api.Test
