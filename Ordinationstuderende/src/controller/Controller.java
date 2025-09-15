@@ -36,7 +36,6 @@ public class Controller {
 	 */
 	public PN opretPNOrdination(LocalDate startDen, LocalDate slutDen,
 			Patient patient, Laegemiddel laegemiddel, double antal) {
-		// TODO
 
 		if (startDen == null || slutDen == null || patient == null || laegemiddel == null)
 			throw new IllegalArgumentException("Parameter må ikke være null");
