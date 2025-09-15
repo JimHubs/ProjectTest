@@ -43,7 +43,18 @@ public class Patient {
         return navn + "  " + cprnr;
     }
 
+    public void addOrdination(Ordination ordination){
+        if(!ordinations.contains(ordination)){
+            ordinations.add(ordination);
+        }
+    }
+
+    public void removeOrdination(Ordination ordination){
+        ordinations.remove(ordination);
+    }
+
+
     public ArrayList<Ordination> getOrdinationer() {
-        return ordinations;
+        return new ArrayList<>(ordinations);
     }
 }
