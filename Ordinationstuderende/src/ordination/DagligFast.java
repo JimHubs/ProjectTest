@@ -9,9 +9,9 @@ public class DagligFast extends Ordination{
     private Dosis doser[] = new Dosis[4];
 
     public DagligFast(LocalDate startDen, LocalDate slutDen, Laegemiddel laegemiddel,
-                      Dosis morgen, Dosis middag, Dosis aften, Dosis nat) {
+                      double morgen, Dosis middag, Dosis aften, Dosis nat) {
         super(startDen, slutDen, laegemiddel);
-        this.doser[0] = morgen;
+        doser[0] = new Dosis();
         this.doser[1] = middag;
         this.doser[2] = aften;
         this.doser[3] = nat;
