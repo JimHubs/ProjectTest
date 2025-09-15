@@ -168,8 +168,7 @@ public class Controller {
                 }
             }
         }
-
-		return 0;
+		return count;
 	}
 
 	public List<Patient> getAllPatienter() {
