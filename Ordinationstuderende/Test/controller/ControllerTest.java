@@ -3,10 +3,7 @@ package controller;
 import ordination.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 
-import javax.swing.*;
-import javax.xml.xpath.XPath;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -17,12 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ControllerTest {
 
     private Controller controller;
-    private Laegemiddel standardLaegemiddel;
+    private Laegemiddel testLaegemiddel;
 
     @BeforeEach
     void setUp(){
         controller = Controller.getController();
-        standardLaegemiddel = new Laegemiddel(
+        testLaegemiddel = new Laegemiddel(
                 "Fent", 0.1,0.15,
                 0.3,"NULL");
     }
@@ -46,7 +43,7 @@ class ControllerTest {
             PN pn = controller.opretPNOrdination(
                     LocalDate.of(2000,2,2),
                     LocalDate.of(2001,2,2),
-                    patient,standardLaegemiddel,1);
+                    patient, testLaegemiddel,1);
             controller.ordinationPNAnvendt(pn, LocalDate.of(2025,9,15));
         });
         assertEquals("Datoen er ikke indefor ordinations gyldighedsperiode",  exception.getMessage());
@@ -55,7 +52,7 @@ class ControllerTest {
     @Test
     void anbefaletDosisPrDoegn_NULL_Patient() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            controller.anbefaletDosisPrDoegn(null,standardLaegemiddel);
+            controller.anbefaletDosisPrDoegn(null, testLaegemiddel);
         });
         assertEquals("Parametre må ikke være null", exception.getMessage());
     }
@@ -69,13 +66,13 @@ class ControllerTest {
         assertEquals("Parametre må ikke være null", exception.getMessage());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     void anbefaletDosisPrDoegn_Let_24() {
         Patient patient = new Patient("1","John", 24);
         double forventetResultat = patient.getVaegt() *
-                standardLaegemiddel.getEnhedPrKgPrDoegnLet();
+                testLaegemiddel.getEnhedPrKgPrDoegnLet();
         double faktiskResultat = controller.anbefaletDosisPrDoegn(patient,
-                standardLaegemiddel);
+                testLaegemiddel);
         assertEquals(forventetResultat, faktiskResultat);
     }
 
@@ -83,9 +80,9 @@ class ControllerTest {
     void anbefaletDosisPrDoegn_Normal_25() {
         Patient patient = new Patient("1","John", 25);
         double forventetResultat = patient.getVaegt() *
-                standardLaegemiddel.getEnhedPrKgPrDoegnNormal();
+                testLaegemiddel.getEnhedPrKgPrDoegnNormal();
         double faktiskResultat = controller.anbefaletDosisPrDoegn(patient,
-                standardLaegemiddel);
+                testLaegemiddel);
         assertEquals(forventetResultat, faktiskResultat);
     }
 
@@ -93,9 +90,9 @@ class ControllerTest {
     void anbefaletDosisPrDoegn_Normal_119() {
         Patient patient = new Patient("1","John", 119);
         double forventetResultat = patient.getVaegt() *
-                standardLaegemiddel.getEnhedPrKgPrDoegnNormal();
+                testLaegemiddel.getEnhedPrKgPrDoegnNormal();
         double faktiskResultat = controller.anbefaletDosisPrDoegn(patient,
-                standardLaegemiddel);
+                testLaegemiddel);
         assertEquals(forventetResultat, faktiskResultat);
     }
 
@@ -103,9 +100,9 @@ class ControllerTest {
     void anbefaletDosisPrDoegn_Normal_120() {
         Patient patient = new Patient("1","John", 120);
         double forventetResultat = patient.getVaegt() *
-                standardLaegemiddel.getEnhedPrKgPrDoegnNormal();
+                testLaegemiddel.getEnhedPrKgPrDoegnNormal();
         double faktiskResultat = controller.anbefaletDosisPrDoegn(patient,
-                standardLaegemiddel);
+                testLaegemiddel);
         assertEquals(forventetResultat, faktiskResultat);
     }
 
@@ -113,9 +110,9 @@ class ControllerTest {
     void anbefaletDosisPrDoegn_Tung_121() {
         Patient patient = new Patient("1","John", 121);
         double forventetResultat = patient.getVaegt() *
-                standardLaegemiddel.getEnhedPrKgPrDoegnTung();
+                testLaegemiddel.getEnhedPrKgPrDoegnTung();
         double faktiskResultat = controller.anbefaletDosisPrDoegn(patient,
-                standardLaegemiddel);
+                testLaegemiddel);
         assertEquals(forventetResultat, faktiskResultat);
     }
 
