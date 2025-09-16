@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DagligFastTest {
 
     @Test
-    void dagligFast_doegnDosis() {
+    void TC1_dagligFast_doegnDosis() {
         //Arrange
 
         Laegemiddel laegemiddel = new Laegemiddel("Paracetamol", 1, 1.5, 2, "Ml");
@@ -22,7 +22,7 @@ class DagligFastTest {
     }
 
     @Test
-    void dagligFast_samletDosis() {
+    void TC2_dagligFast_samletDosis() {
         //Arrange
         Laegemiddel laegemiddel = new Laegemiddel("Paracetamol", 1, 1.5, 2, "Ml");
         DagligFast dagligFast = new DagligFast(LocalDate.of(2025,03,14), LocalDate.of(2025,03,17),laegemiddel, 2,1,3,1);

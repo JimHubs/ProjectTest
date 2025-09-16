@@ -16,7 +16,7 @@ class DagligSkaevTest {
     DagligSkaev testSkaev = new DagligSkaev(LocalDate.of(2025,9,15), LocalDate.of(2025,9,16), testMiddel, testDoser);
 
     @org.junit.jupiter.api.Test
-    void DagligSkaev_OpretDosis() {
+    void TC3_DagligSkaev_OpretDosis() {
 
         ArrayList<Dosis> doser = new ArrayList<>();
 
@@ -32,7 +32,7 @@ class DagligSkaevTest {
     }
 
     @Test
-    void opretDosis_NULL_tid() {
+    void TC4_opretDosis_NULL_tid() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
             testSkaev.opretDosis(null, 2);
         });
@@ -40,7 +40,7 @@ class DagligSkaevTest {
     }
 
     @Test
-    void opretDosis_0_Antal() {
+    void TC5_opretDosis_0_Antal() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
         testSkaev.opretDosis(LocalTime.of(2,30), 0);
         });
@@ -48,7 +48,7 @@ class DagligSkaevTest {
     }
 
     @Test
-    void opretDosis_negativ_Antal() {
+    void TC_6opretDosis_negativ_Antal() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
             testSkaev.opretDosis(LocalTime.of(2,30), -1);
         });
@@ -56,14 +56,14 @@ class DagligSkaevTest {
     }
 
     @Test
-    void samletDosis() {
+    void TC7_samletDosis() {
         testSkaev.opretDosis(LocalTime.of(2,30), 2);
         double resultat = testSkaev.samletDosis();
         assertEquals(2, resultat);
     }
 
     @Test
-    void doegnDosis() {
+    void TC8_doegnDosis() {
         ArrayList<Dosis> doser = new ArrayList<>();
 
         Laegemiddel laegemiddel = new Laegemiddel("Paracetamol", 1, 1.5, 2, "Ml");

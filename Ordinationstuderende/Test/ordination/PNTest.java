@@ -9,21 +9,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class PNTest {
 
     @Test
-    void PN_Opret() {
+    void TC9_PN_Opret() {
         Laegemiddel laegemiddel = new Laegemiddel("Paracetamol", 1, 1.5, 2, "Ml");
-        PN pn = new PN(LocalDate.of(2025,3,14), LocalDate.of(2025,3,28),laegemiddel, 3);
+        PN pn = new PN(LocalDate.of(2025,03,14), LocalDate.of(2025,03,28),laegemiddel, 3);
 
-        PN pn1 = new PN(LocalDate.of(2025,3,14), LocalDate.of(2025,3,28),laegemiddel, 3);
+        PN pn1 = new PN(LocalDate.of(2025,03,14), LocalDate.of(2025,03,28),laegemiddel, 3);
 
-        assertEquals(pn1.getAntalEnheder(), pn.getAntalEnheder());
+        assertEquals(3, pn.getAntalEnheder());
     }
 
     @Test
-    void givDosis() {
-    }
-
-    @Test
-    void doegnDosis() {
+    void TC10_doegnDosis() {
         Laegemiddel laegemiddel = new Laegemiddel("Paracetamol", 1, 1.5, 2, "Ml");
         PN pn = new PN(LocalDate.of(2025,3,14), LocalDate.of(2025,3,28),laegemiddel, 3);
 
@@ -36,7 +32,7 @@ class PNTest {
     }
 
     @Test
-    void samletDosis() {
+    void TC11_samletDosis() {
         Laegemiddel laegemiddel = new Laegemiddel("Paracetamol", 1, 1.5, 2, "Ml");
         PN pn = new PN(LocalDate.of(2025,3,14), LocalDate.of(2025,3,28),laegemiddel, 3);
 
@@ -47,4 +43,6 @@ class PNTest {
 
         assertEquals(12, pn.samletDosis());
     }
+
+
 }

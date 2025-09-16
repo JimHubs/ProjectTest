@@ -25,7 +25,7 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void ordinationPNAnvendt_NULL_Parameter() {
+    void TC14_ordinationPNAnvendt_NULL_Parameter() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
             controller.ordinationPNAnvendt(null, null);
         });
@@ -33,7 +33,7 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void ordinationPNAnvendt_OutOf_Parameter() {
+    void TC15_ordinationPNAnvendt_OutOf_Parameter() {
         Patient patient = new Patient("1","John", 100);
         Exception exception = assertThrows(RuntimeException.class, () -> {
             PN pn = controller.opretPNOrdination(
@@ -46,7 +46,7 @@ class ControllerTest {
     }
 
     @Test
-    void anbefaletDosisPrDoegn_NULL_Patient() {
+    void TC26_anbefaletDosisPrDoegn_NULL_Patient() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
             controller.anbefaletDosisPrDoegn(null, testLaegemiddel);
         });
@@ -54,7 +54,7 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void anbefaletDosisPrDoegn_NULL_Laegemiddel() {
+    void TC27_anbefaletDosisPrDoegn_NULL_Laegemiddel() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
             Patient patient = new Patient("1","John", 10.0);
             controller.anbefaletDosisPrDoegn(patient,null);
@@ -63,7 +63,7 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void anbefaletDosisPrDoegn_Let_24() {
+    void TC21_anbefaletDosisPrDoegn_Let_24() {
         Patient patient = new Patient("1","John", 24);
         double forventetResultat = patient.getVaegt() *
                 testLaegemiddel.getEnhedPrKgPrDoegnLet();
@@ -73,7 +73,7 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void anbefaletDosisPrDoegn_Normal_25() {
+    void TC22_anbefaletDosisPrDoegn_Normal_25() {
         Patient patient = new Patient("1","John", 25);
         double forventetResultat = patient.getVaegt() *
                 testLaegemiddel.getEnhedPrKgPrDoegnNormal();
@@ -83,7 +83,7 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void anbefaletDosisPrDoegn_Normal_119() {
+    void TC23_anbefaletDosisPrDoegn_Normal_119() {
         Patient patient = new Patient("1","John", 119);
         double forventetResultat = patient.getVaegt() *
                 testLaegemiddel.getEnhedPrKgPrDoegnNormal();
@@ -93,7 +93,7 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void anbefaletDosisPrDoegn_Normal_120() {
+    void TC24_anbefaletDosisPrDoegn_Normal_120() {
         Patient patient = new Patient("1","John", 120);
         double forventetResultat = patient.getVaegt() *
                 testLaegemiddel.getEnhedPrKgPrDoegnNormal();
@@ -103,7 +103,7 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void anbefaletDosisPrDoegn_Tung_121() {
+    void TC25_anbefaletDosisPrDoegn_Tung_121() {
         Patient patient = new Patient("1","John", 121);
         double forventetResultat = patient.getVaegt() *
                 testLaegemiddel.getEnhedPrKgPrDoegnTung();
@@ -113,7 +113,7 @@ class ControllerTest {
     }
 
     @Test
-    void antalOrdinationerPrVægtPrLægemiddel() {
+    void TC20_antalOrdinationerPrVægtPrLægemiddel() {
         // Arrange
         Laegemiddel standardLaegemiddel = new Laegemiddel("Paracetamol", 1, 1.5, 2, "Ml");
 
@@ -130,7 +130,7 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void opretPatient() {
+    void TC28_opretPatient() {
         Patient faktiskpatient = controller.opretPatient("1", "John", 10.0);
         Patient forventetPatient = new Patient("1", "John", 10.0);
         assertEquals(forventetPatient.getCprnr(), faktiskpatient.getCprnr());
@@ -139,7 +139,7 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void opretLaegemiddel() {
+    void TC29_opretLaegemiddel() {
         Laegemiddel faktiskLaegemiddel = controller.opretLaegemiddel("Fent", 0.1,
                 0.2,0.4, "Test");
         Laegemiddel forventetLaegemiddel = new Laegemiddel("Fent", 0.1,
@@ -152,7 +152,7 @@ class ControllerTest {
     }
 
     @Test
-    void opretPNOrdination() {
+    void TC12_opretPNOrdination() {
         Patient patient = new Patient("1", "John" , 100);
         PN faktiskPNOrd = controller.opretPNOrdination(LocalDate.of(2025,9,16),
                 LocalDate.of(2025,9,25),
@@ -166,7 +166,7 @@ class ControllerTest {
     }
 
     @Test
-    void opretDagligFastOrdination() {
+    void TC16_opretDagligFastOrdination() {
         Patient patient = new Patient("1", "John" , 100);
         DagligFast faktiskFastOrd = controller.opretDagligFastOrdination(LocalDate.of(2025,9,16),
                 LocalDate.of(2025,9,25),
@@ -180,7 +180,7 @@ class ControllerTest {
     }
 
     @Test
-    void testOpretDagligSkaevOrdination() {
+    void TC18_testOpretDagligSkaevOrdination() {
         Patient patient = new Patient("1", "John" , 100);
         LocalTime[] times = new LocalTime[0];
         double[] doser = new double[0];
@@ -197,7 +197,7 @@ class ControllerTest {
     }
 
     @Test
-    void opretPNOrdination_StartDatoError() {
+    void TC13_opretPNOrdination_StartDatoError() {
         Patient patient = new Patient("1","John", 10.0);
         Exception exception = assertThrows(RuntimeException.class, () -> {
             PN pn = controller.opretPNOrdination(LocalDate.of(2025,3,29),
@@ -209,7 +209,7 @@ class ControllerTest {
 
 
     @Test
-    void opretDagligFastOrdination_StartDatoError(){
+    void TC17_opretDagligFastOrdination_StartDatoError(){
         Patient patient = new Patient("1","John", 10.0);
         Exception exception = assertThrows(RuntimeException.class, () -> {
             DagligFast dagligFast = controller.opretDagligFastOrdination(LocalDate.of(2025,3,29),
@@ -220,7 +220,7 @@ class ControllerTest {
     }
 
     @Test
-    void opretDagligSkaevOrdination_StartDateError() {
+    void TC19_opretDagligSkaevOrdination() {
         Patient patient = new Patient("1","John", 10.0);
         LocalTime[] times = new LocalTime[0];
         double[] doser = new double[0];
