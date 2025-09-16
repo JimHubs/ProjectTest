@@ -153,10 +153,6 @@ public class Controller {
 	 */
 	public int antalOrdinationerPrVægtPrLægemiddel(double vægtStart,
 			double vægtSlut, Laegemiddel laegemiddel) {
-		// TODO
-		if (laegemiddel == null)
-			throw new IllegalArgumentException("laegemiddel må ikke være null");
-
         int count = 0;
 
         for(Patient patient : getAllPatienter()) {

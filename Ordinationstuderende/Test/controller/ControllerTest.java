@@ -142,7 +142,6 @@ class ControllerTest {
         assertEquals(1, antal);
     }
 
-
     @org.junit.jupiter.api.Test
     void opretPatient() {
         Patient faktiskpatient = controller.opretPatient("1", "John", 10.0);
