@@ -132,12 +132,8 @@ class ControllerTest {
 
         Patient patient = controller.opretPatient("1", "John", 121);
         PN ordination = controller.opretPNOrdination(
-                LocalDate.of(2025,3,14),
-                LocalDate.of(2025,3,20),
-                patient,
-                standardLaegemiddel,
-                2
-        );
+                LocalDate.of(2025,3,14), LocalDate.of(2025,3,20),
+                patient, standardLaegemiddel, 2);
 
         // Act
         int antal = controller.antalOrdinationerPrVægtPrLægemiddel(60, 121, standardLaegemiddel);
