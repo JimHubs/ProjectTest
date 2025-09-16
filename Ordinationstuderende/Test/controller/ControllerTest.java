@@ -25,10 +25,6 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void getController() {
-    }
-
-    @org.junit.jupiter.api.Test
     void ordinationPNAnvendt_NULL_Parameter() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
             controller.ordinationPNAnvendt(null, null);
@@ -224,7 +220,7 @@ class ControllerTest {
     }
 
     @Test
-    void opretDagligSkaevOrdination() {
+    void opretDagligSkaevOrdination_StartDateError() {
         Patient patient = new Patient("1","John", 10.0);
         LocalTime[] times = new LocalTime[0];
         double[] doser = new double[0];
