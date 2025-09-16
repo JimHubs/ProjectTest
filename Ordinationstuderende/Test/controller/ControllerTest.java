@@ -125,6 +125,28 @@ class ControllerTest {
         assertEquals(forventetResultat, faktiskResultat);
     }
 
+    @Test
+    void antalOrdinationerPrVægtPrLægemiddel() {
+        // Arrange
+        Laegemiddel standardLaegemiddel = new Laegemiddel("Paracetamol", 1, 1.5, 2, "Ml");
+
+        Patient patient = controller.opretPatient("1", "John", 121);
+        PN ordination = controller.opretPNOrdination(
+                LocalDate.of(2025,3,14),
+                LocalDate.of(2025,3,20),
+                patient,
+                standardLaegemiddel,
+                2
+        );
+
+        // Act
+        int antal = controller.antalOrdinationerPrVægtPrLægemiddel(60, 121, standardLaegemiddel);
+
+        // Assert
+        assertEquals(1, antal);
+    }
+
+
     @org.junit.jupiter.api.Test
     void opretPatient() {
         Patient faktiskpatient = controller.opretPatient("1", "John", 10.0);
