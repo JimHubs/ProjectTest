@@ -3,13 +3,8 @@ package controller;
 import ordination.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
-
-import javax.swing.*;
-import javax.xml.xpath.XPath;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -44,17 +39,12 @@ class ControllerTest {
         Patient patient = new Patient("1","John", 100);
         Exception exception = assertThrows(RuntimeException.class, () -> {
             PN pn = controller.opretPNOrdination(
-                    LocalDate.of(2000,2,2),
+                    LocalDate.of(2000,2,3),
                     LocalDate.of(2001,2,2),
                     patient,standardLaegemiddel,1);
             controller.ordinationPNAnvendt(pn, LocalDate.of(2025,9,15));
         });
         assertEquals("Datoen er ikke indefor ordinations gyldighedsperiode",  exception.getMessage());
-    }
-
-    @org.junit.jupiter.api.Test
-    void anbefaletDosisPrDoegn() {
-        //TODO
     }
 
     @org.junit.jupiter.api.Test
