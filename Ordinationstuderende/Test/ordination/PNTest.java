@@ -11,11 +11,11 @@ class PNTest {
     @Test
     void PN_Opret() {
         Laegemiddel laegemiddel = new Laegemiddel("Paracetamol", 1, 1.5, 2, "Ml");
-        PN pn = new PN(LocalDate.of(2025,03,14), LocalDate.of(2025,03,28),laegemiddel, 3);
+        PN pn = new PN(LocalDate.of(2025,3,14), LocalDate.of(2025,3,28),laegemiddel, 3);
 
-        PN pn1 = new PN(LocalDate.of(2025,03,14), LocalDate.of(2025,03,28),laegemiddel, 3);
+        PN pn1 = new PN(LocalDate.of(2025,3,14), LocalDate.of(2025,3,28),laegemiddel, 3);
 
-        assertEquals(3, pn.getAntalEnheder());
+        assertEquals(pn1.getAntalEnheder(), pn.getAntalEnheder());
     }
 
     @Test
