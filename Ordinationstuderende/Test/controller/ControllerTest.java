@@ -3,7 +3,10 @@ package controller;
 import ordination.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
 
+import javax.swing.*;
+import javax.xml.xpath.XPath;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -14,17 +17,21 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ControllerTest {
 
     private Controller controller;
-    private Laegemiddel testLaegemiddel;
+    private Laegemiddel standardLaegemiddel;
 
     @BeforeEach
     void setUp(){
         controller = Controller.getController();
-        testLaegemiddel = new Laegemiddel(
+        standardLaegemiddel = new Laegemiddel(
                 "Fent", 0.1,0.15,
                 0.3,"NULL");
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
+    void getController() {
+    }
+
+    @org.junit.jupiter.api.Test
     void ordinationPNAnvendt_NULL_Parameter() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
             controller.ordinationPNAnvendt(null, null);
@@ -32,14 +39,14 @@ class ControllerTest {
         assertEquals("Parameter må ikke være null",  exception.getMessage());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     void ordinationPNAnvendt_OutOf_Parameter() {
         Patient patient = new Patient("1","John", 100);
         Exception exception = assertThrows(RuntimeException.class, () -> {
             PN pn = controller.opretPNOrdination(
                     LocalDate.of(2000,2,2),
                     LocalDate.of(2001,2,2),
-                    patient, testLaegemiddel,1);
+                    patient,standardLaegemiddel,1);
             controller.ordinationPNAnvendt(pn, LocalDate.of(2025,9,15));
         });
         assertEquals("Datoen er ikke indefor ordinations gyldighedsperiode",  exception.getMessage());
@@ -48,12 +55,12 @@ class ControllerTest {
     @Test
     void anbefaletDosisPrDoegn_NULL_Patient() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            controller.anbefaletDosisPrDoegn(null, testLaegemiddel);
+            controller.anbefaletDosisPrDoegn(null,standardLaegemiddel);
         });
         assertEquals("Parametre må ikke være null", exception.getMessage());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     void anbefaletDosisPrDoegn_NULL_Laegemiddel() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
             Patient patient = new Patient("1","John", 10.0);
@@ -66,53 +73,70 @@ class ControllerTest {
     void anbefaletDosisPrDoegn_Let_24() {
         Patient patient = new Patient("1","John", 24);
         double forventetResultat = patient.getVaegt() *
-                testLaegemiddel.getEnhedPrKgPrDoegnLet();
+                standardLaegemiddel.getEnhedPrKgPrDoegnLet();
         double faktiskResultat = controller.anbefaletDosisPrDoegn(patient,
-                testLaegemiddel);
+                standardLaegemiddel);
         assertEquals(forventetResultat, faktiskResultat);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     void anbefaletDosisPrDoegn_Normal_25() {
         Patient patient = new Patient("1","John", 25);
         double forventetResultat = patient.getVaegt() *
-                testLaegemiddel.getEnhedPrKgPrDoegnNormal();
+                standardLaegemiddel.getEnhedPrKgPrDoegnNormal();
         double faktiskResultat = controller.anbefaletDosisPrDoegn(patient,
-                testLaegemiddel);
+                standardLaegemiddel);
         assertEquals(forventetResultat, faktiskResultat);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     void anbefaletDosisPrDoegn_Normal_119() {
         Patient patient = new Patient("1","John", 119);
         double forventetResultat = patient.getVaegt() *
-                testLaegemiddel.getEnhedPrKgPrDoegnNormal();
+                standardLaegemiddel.getEnhedPrKgPrDoegnNormal();
         double faktiskResultat = controller.anbefaletDosisPrDoegn(patient,
-                testLaegemiddel);
+                standardLaegemiddel);
         assertEquals(forventetResultat, faktiskResultat);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     void anbefaletDosisPrDoegn_Normal_120() {
         Patient patient = new Patient("1","John", 120);
         double forventetResultat = patient.getVaegt() *
-                testLaegemiddel.getEnhedPrKgPrDoegnNormal();
+                standardLaegemiddel.getEnhedPrKgPrDoegnNormal();
         double faktiskResultat = controller.anbefaletDosisPrDoegn(patient,
-                testLaegemiddel);
+                standardLaegemiddel);
         assertEquals(forventetResultat, faktiskResultat);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     void anbefaletDosisPrDoegn_Tung_121() {
         Patient patient = new Patient("1","John", 121);
         double forventetResultat = patient.getVaegt() *
-                testLaegemiddel.getEnhedPrKgPrDoegnTung();
+                standardLaegemiddel.getEnhedPrKgPrDoegnTung();
         double faktiskResultat = controller.anbefaletDosisPrDoegn(patient,
-                testLaegemiddel);
+                standardLaegemiddel);
         assertEquals(forventetResultat, faktiskResultat);
     }
 
     @Test
+    void antalOrdinationerPrVægtPrLægemiddel() {
+        // Arrange
+        Laegemiddel standardLaegemiddel = new Laegemiddel("Paracetamol", 1, 1.5, 2, "Ml");
+
+        Patient patient = controller.opretPatient("1", "John", 121);
+        PN ordination = controller.opretPNOrdination(
+                LocalDate.of(2025,3,14), LocalDate.of(2025,3,20),
+                patient, standardLaegemiddel, 2);
+
+        // Act
+        int antal = controller.antalOrdinationerPrVægtPrLægemiddel(60, 121, standardLaegemiddel);
+
+        // Assert
+        assertEquals(1, antal);
+    }
+
+    @org.junit.jupiter.api.Test
     void opretPatient() {
         Patient faktiskpatient = controller.opretPatient("1", "John", 10.0);
         Patient forventetPatient = new Patient("1", "John", 10.0);
@@ -121,7 +145,7 @@ class ControllerTest {
         assertEquals(forventetPatient.getVaegt(), faktiskpatient.getVaegt());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     void opretLaegemiddel() {
         Laegemiddel faktiskLaegemiddel = controller.opretLaegemiddel("Fent", 0.1,
                 0.2,0.4, "Test");
