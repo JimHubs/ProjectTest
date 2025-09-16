@@ -24,8 +24,6 @@ public class PN extends Ordination{
      */
 
     public boolean givDosis(LocalDate givesDen) {
-        // TODO Færdig
-
         if(givesDen == null) return false;
 
         if(!givesDen.isBefore(getStartDen()) && !givesDen.isAfter(getSlutDen())){
@@ -36,7 +34,6 @@ public class PN extends Ordination{
     }
 
     public double doegnDosis() {
-        // TODO Færdig
         if(givetDoser.isEmpty()) return 0.0;
         return samletDosis()/givetDoser.size();
     }
@@ -48,7 +45,6 @@ public class PN extends Ordination{
 
 
     public double samletDosis() {
-        // TODO Færdig
         return givetDoser.size() * antalEnheder;
     }
 
@@ -57,7 +53,6 @@ public class PN extends Ordination{
      * @return
      */
     public int getAntalGangeGivet() {
-        // TODO Færdig
         return givetDoser.size();
     }
 
