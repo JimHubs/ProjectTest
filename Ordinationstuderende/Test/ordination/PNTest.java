@@ -47,12 +47,4 @@ class PNTest {
 
         assertEquals(12, pn.samletDosis());
     }
-
-    @Test
-    void getAntalGangeGivet() {
-    }
-
-    @Test
-    void getAntalEnheder() {
-    }
 }
